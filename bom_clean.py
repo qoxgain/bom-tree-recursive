@@ -64,4 +64,17 @@ def bom_clean(product, bom, bom_level='item'):
     else:
         return product_bom
         
-        
+def bom_expand(product_list, bom):
+    """
+    物料采购成本计算
+    bom展开到物料层
+    """
+    bom_list = pd.DataFrame(None)
+    for product in product_list:
+        bom_product = bom_clean(product, bom)
+        if len(bom_product) > 0:
+            bom_list = pd.concat([bom_list, bom_product])
+
+    return bom_list
+
+    
